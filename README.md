@@ -1,4 +1,4 @@
-# Copilot Tokens Saver — "Agent"
+# Copilot Tokens Saver — Instructions
 
 ## Why This Approach
 
@@ -62,4 +62,32 @@ If `.github/copilot-instructions.md` already exists, add this line:
 Copilot Tokens Saver activates automatically for all Copilot chat sessions in that repo — no agent switching required.
 
 Type `/about tokens-saver` in any Copilot chat session to confirm Copilot Tokens Saver is active.
-Expected response: `Copilot Tokens Saver for GitHub Copilot v1.2.1 — reduces AI token consumption for day-to-day development. Caveman on. Cmd: /about tokens-saver`
+Expected response: `Copilot Tokens Saver for GitHub Copilot v1.0.0 — reduces AI token consumption for day-to-day development. Caveman on. Cmd: /about tokens-saver`
+
+### Codex
+
+Copy `AGENTS.md` to `~/.codex/AGENTS.md`:
+
+```sh
+cp .github/tokens-saver/AGENTS.md ~/.codex/AGENTS.md
+```
+
+If `~/.codex/AGENTS.md` already exists, append the `# Personal Coding Rules` section:
+
+```sh
+cat .github/tokens-saver/AGENTS.md >> ~/.codex/AGENTS.md
+```
+
+### Claude Code
+
+Copy `AGENTS.md` to `~/.claude/AGENTS.md`:
+
+```sh
+cp .github/tokens-saver/AGENTS.md ~/.claude/AGENTS.md
+```
+
+If `~/.claude/AGENTS.md` already exists, append the `# Personal Coding Rules` section:
+
+```sh
+cat .github/tokens-saver/AGENTS.md >> ~/.claude/AGENTS.md
+```

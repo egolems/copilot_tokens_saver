@@ -6,6 +6,25 @@ GitHub Copilot's consumption-based pricing model bills **input and output tokens
 
 The straightforward fix is to tell Copilot to stop producing that prose. The challenge is making that instruction persistent and universal without requiring every developer to manually select a custom agent on each session.
 
+### Expected Token Savings
+
+| Scenario | Output token reduction |
+|---|---|
+| General Q&A, code review | 20–35% (filler prose eliminated) |
+| File analysis (YAML, JSON, logs, configs) | **70–90%** (no raw file echo) |
+| Weighted average across typical dev workflow | ~40–60% |
+
+The largest single source of waste is Copilot echoing back entire input files verbatim — reading a YAML config, analyzing a log, reviewing a JSON schema. Without the no-echo rule, Copilot re-outputs the full file content as "context" before answering. A 500-line YAML file ≈ 3,000–5,000 output tokens per operation. With the rule: a 2–3 line summary. That alone drives the 70–90% reduction on those operations.
+
+| Factor | Estimate |
+|---|---|
+| Prompt overhead (input) | ~300 tokens per conversation |
+| Output tokens saved per interaction (avg) | ~150–2,000+ depending on operation |
+| Net saving per interaction | always positive (output at 5× cost) |
+
+**Per developer at 50 interactions/day:** ~$2–10/month saved.
+**Team of 20 devs:** ~$40–200/month — from eliminating prose and file echoing that adds no information.
+
 The solution is to **load a Copilot Tokens Saver prompt file as a default instruction extension** via `.github/copilot-instructions.md`. 
 
 This is technically a hack: Copilot resolves the `#file:` reference in the instruction file and injects the full prompt into every conversation automatically, without any manual agent switching. The behavior becomes a repository-level default that applies to all team members across all Copilot surfaces (IDE chat, PR reviews, inline suggestions where applicable).
